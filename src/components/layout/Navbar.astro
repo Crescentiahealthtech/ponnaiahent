@@ -1,0 +1,68 @@
+---
+import { HOSPITAL_IDENTITY } from '../../data/clinicalData';
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 h-16 bg-canvas-deep/80 backdrop-blur-xl border-b border-hairline-dark">
+  <div class="max-w-[1360px] mx-auto h-full px-6 lg:px-12 flex items-center justify-between">
+    <!-- Brand Mark -->
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-8 h-8 bg-canvas-elevated border border-white/20 flex items-center justify-center font-mono text-xs font-bold tracking-tighter text-lunar-cyan">
+        P+
+      </div>
+      <div>
+        <span class="block text-sm font-semibold tracking-[0.14em] text-white uppercase leading-none">
+          {HOSPITAL_IDENTITY.name}
+        </span>
+        <span class="block font-mono text-[9px] tracking-[0.18em] text-ink-body uppercase mt-1">
+          ENT & IVF SUPER SPECIALITY
+        </span>
+      </div>
+    </a>
+
+    <!-- Uppercase Tracked Navigation (0.65px tracking per Ferrari spec) -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a
+        href="#specialists"
+        class="text-[13px] font-semibold uppercase tracking-nav text-ink-body hover:text-white transition-colors"
+      >
+        Specialists
+      </a>
+      <a
+        href="#ent-wing"
+        class="text-[13px] font-semibold uppercase tracking-nav text-ink-body hover:text-lunar-cyan transition-colors"
+      >
+        Micro-ENT Wing
+      </a>
+      <a
+        href="#acoustic-studio"
+        class="text-[13px] font-semibold uppercase tracking-nav text-ink-body hover:text-lunar-cyan transition-colors"
+      >
+        Acoustic Studio
+      </a>
+      <a
+        href="#ivf-wing"
+        class="text-[13px] font-semibold uppercase tracking-nav text-ink-body hover:text-rosso transition-colors"
+      >
+        IVF & Embryology
+      </a>
+      <a
+        href="#node-matrix"
+        class="text-[13px] font-semibold uppercase tracking-nav text-ink-body hover:text-white transition-colors"
+      >
+        3D Telemetry
+      </a>
+    </nav>
+
+    <!-- Right Action -->
+    <div class="flex items-center gap-4">
+      <button
+        type="button"
+        onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'ENT' } }))"
+        class="btn-primary-rosso !h-10 !px-5 !text-xs"
+      >
+        BOOK CONSULTATION
+      </button>
+    </div>
+  </div>
+</header>
+
