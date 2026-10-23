@@ -1,0 +1,450 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import SculptureHero3D from '../components/three/SculptureHero3D';
+import AcousticLabStudio from '../components/audio/AcousticLabStudio';
+import ClinicalNodeViewer from '../components/three/ClinicalNodeViewer';
+import ConsultationDrawer from '../components/booking/ConsultationDrawer';
+import { HOSPITAL_IDENTITY, SPECIALISTS } from '../data/clinicalData';
+---
+
+<BaseLayout>
+  <Navbar />
+  <ConsultationDrawer client:load />
+
+  <main class="pt-16">
+    <!-- ================================================================
+         STAGE 01: DARK CINEMA HERO (Apple Pro + Ferrari Precision)
+         ================================================================ -->
+    <section class="relative min-h-[calc(100vh-4rem)] bg-canvas-deep border-b border-hairline-dark flex items-center overflow-hidden">
+      <!-- Subtle Atmospheric Radial Glows -->
+      <div class="pointer-events-none absolute -top-40 left-1/4 w-[560px] h-[560px] rounded-full bg-lunar-cyan/10 blur-[140px]"></div>
+      <div class="pointer-events-none absolute bottom-0 right-1/4 w-[480px] h-[480px] rounded-full bg-rosso/10 blur-[150px]"></div>
+
+      <div class="max-w-[1360px] mx-auto w-full px-6 lg:px-12 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Left 7 Cols: Display Typography & Dual Wing CTAs -->
+        <div class="lg:col-span-7 z-10 space-y-8">
+          <div class="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-canvas-elevated border border-white/10">
+            <span class="w-2 h-2 rounded-full bg-lunar-cyan"></span>
+            <span class="font-mono text-[11px] uppercase tracking-caption text-lunar-silver">
+              DUAL CENTRES OF EXCELLENCE · OTOLARYNGOLOGY & REPRODUCTIVE MEDICINE
+            </span>
+          </div>
+
+          <h1 class="display-mega text-white">
+            Precision you can <span class="text-lunar-cyan">hear.</span><br />
+            Life you can <span class="text-rosso">hold.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-ink-body max-w-2xl font-normal leading-relaxed">
+            Ponnaiah ENT & IVF Super Speciality Hospital unites sub-millimeter endoscopic acoustic surgery under <strong class="text-white font-medium">Dr. Gopinath</strong> with ISO-5 cleanroom reproductive embryology led by <strong class="text-white font-medium">Dr. Manopriya Gopinath</strong>.
+          </p>
+
+          <!-- Sharp 0px Action Bar -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              type="button"
+              onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'ENT' } }))"
+              class="btn-primary-cyan"
+            >
+              CONSULT DR. GOPINATH (ENT)
+            </button>
+            <button
+              type="button"
+              onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'IVF' } }))"
+              class="btn-primary-rosso"
+            >
+              CONSULT DR. MANOPRIYA (IVF)
+            </button>
+            <a href="#acoustic-studio" class="btn-outline-sharp">
+              LAUNCH SOUND TEST STUDIO
+            </a>
+          </div>
+
+          <!-- Key Telemetry Strip -->
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-hairline-dark max-w-xl">
+            <div>
+              <div class="text-2xl sm:text-3xl font-semibold text-white tracking-tight">12,400+</div>
+              <div class="font-mono text-[10px] uppercase tracking-caption text-ink-body mt-1">
+                MICRO-EAR & SINUS SURGERIES
+              </div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-semibold text-white tracking-tight">ISO-5</div>
+              <div class="font-mono text-[10px] uppercase tracking-caption text-ink-body mt-1">
+                CLASS-100 EMBRYOLOGY LAB
+              </div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-semibold text-lunar-cyan tracking-tight">4K 3D</div>
+              <div class="font-mono text-[10px] uppercase tracking-caption text-ink-body mt-1">
+                OPTICAL NAVIGATION SUITE
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Interactive 3D Metallic/Glass Sculpture -->
+        <div class="lg:col-span-5">
+          <SculptureHero3D client:load />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 02: APPLE SCROLLYTELLING TRANSITION -> LIGHT EDITORIAL BAND
+         Clinical Leadership: Dr. Gopinath & Dr. Manopriya Gopinath
+         ================================================================ -->
+    <section id="specialists" class="bg-canvas-light text-ink-onLight py-xxl border-b border-hairline-light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-hairline-light" data-reveal>
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-canvas-strong font-mono text-[11px] uppercase tracking-caption text-ink-onLight mb-4">
+              CLINICAL LEADERSHIP DIRECTORY
+            </span>
+            <h2 class="display-xl text-ink-onLight">
+              Two Disciplines.<br />One Standard of Mastery.
+            </h2>
+          </div>
+          <p class="text-sm text-ink-muted max-w-md mt-4 md:mt-0 leading-relaxed">
+            Every diagnostic evaluation and surgical intervention is personally directed by our founding super-specialists, eliminating fragmented handoffs.
+          </p>
+        </div>
+
+        <!-- 2-Up Specialist Editorial Grid (0px sharp cards on soft light surface) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {SPECIALISTS.map((doc) => (
+            <article
+              data-reveal
+              class="bg-canvas-soft border border-hairline-light p-8 sm:p-12 flex flex-col justify-between rounded-none"
+            >
+              <div>
+                <!-- Top Badge & Division -->
+                <div class="flex items-center justify-between pb-6 border-b border-hairline-light mb-8">
+                  <span
+                    class="font-mono text-xs font-semibold uppercase tracking-caption px-3 py-1 rounded-full"
+                    style={`background-color: ${doc.accentColor}15; color: ${doc.accentColor};`}
+                  >
+                    {doc.division === 'ENT' ? 'WING 01 · OTOLARYNGOLOGY' : 'WING 02 · REPRODUCTIVE MEDICINE'}
+                  </span>
+                  <span class="font-mono text-xs text-ink-muted">CHIEF CONSULTANT</span>
+                </div>
+
+                <!-- Specialist Portrait Monogram & Name -->
+                <div class="flex items-start justify-between gap-4 mb-6">
+                  <div>
+                    <h3 class="display-lg text-ink-onLight">{doc.name}</h3>
+                    <p class="text-xs font-mono uppercase tracking-wider text-ink-muted mt-1.5">
+                      {doc.credentials}
+                    </p>
+                    <p class="text-sm font-semibold text-ink-onLight mt-2">
+                      {doc.role}
+                    </p>
+                  </div>
+                </div>
+
+                <blockquote class="border-l-2 pl-4 py-1 my-6 text-sm italic text-ink-onLight/80" style={`border-color: ${doc.accentColor};`}>
+                  “{doc.tagline}”
+                </blockquote>
+
+                <p class="text-sm text-ink-muted leading-relaxed mb-8">
+                  {doc.biography}
+                </p>
+
+                <!-- 3-Column Telemetry Metrics -->
+                <div class="grid grid-cols-3 border-t border-b border-hairline-light py-5 mb-8 gap-4">
+                  {doc.metrics.map((m) => (
+                    <div>
+                      <div class="text-2xl font-bold tracking-tight text-ink-onLight">
+                        {m.value}
+                      </div>
+                      <div class="font-mono text-[10px] uppercase tracking-wider text-ink-muted mt-1">
+                        {m.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Core Clinical Specializations -->
+                <div class="space-y-2.5 mb-10">
+                  <div class="font-mono text-[11px] uppercase tracking-caption text-ink-muted mb-3">
+                    SIGNATURE CLINICAL PROTOCOLS
+                  </div>
+                  {doc.specializations.map((item) => (
+                    <div class="flex items-center gap-3 text-xs font-medium text-ink-onLight py-1.5 border-b border-hairline-soft">
+                      <span class="w-1.5 h-1.5 rounded-full" style={`background-color: ${doc.accentColor};`}></span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div class="font-mono text-[11px] text-ink-muted uppercase mb-4">
+                  OP SCHEDULE: {doc.consultationTimings}
+                </div>
+                <button
+                  type="button"
+                  onclick={`window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: '${doc.division}' } }))`}
+                  class="w-full h-12 rounded-none font-bold text-xs uppercase tracking-cta text-white transition-opacity hover:opacity-90"
+                  style={`background-color: ${doc. division === 'ENT' ? '#181818' : '#DA291C'};`}
+                >
+                  SCHEDULE OP WITH {doc.name.toUpperCase()}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 03: INTERACTIVE PURE-TONE ACOUSTIC RESONANCE STUDIO
+         (Replacing Symptom Checker with Apple AirPods Pro-grade Sound Testing)
+         ================================================================ -->
+    <section id="acoustic-studio" class="bg-canvas-deep py-xxl border-b border-hairline-dark">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+        <div class="max-w-3xl mb-12" data-reveal>
+          <span class="inline-block px-3 py-1 rounded-full bg-canvas-elevated font-mono text-[11px] uppercase tracking-caption text-lunar-cyan mb-4">
+            INTERACTIVE ACOUSTIC TELEMETRY · ENT DIVISION
+          </span>
+          <h2 class="display-xl text-white mb-4">
+            Experience Pure-Tone Cochlear Resonance.
+          </h2>
+          <p class="text-sm sm:text-base text-ink-body leading-relaxed">
+            Before stepping into our sound-isolated audiometry suite, explore how specific acoustic frequencies stimulate distinct regions of the human basilar membrane—from 250 Hz apical warmth to 8000 Hz basal clarity.
+          </p>
+        </div>
+
+        <div data-reveal>
+          <AcousticLabStudio client:visible />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 04: 3D CLINICAL NODE MATRIX (ENT + IVF TELEMETRY)
+         ================================================================ -->
+    <section id="node-matrix" class="bg-canvas py-xxl border-b border-hairline-dark">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12" data-reveal>
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-canvas-elevated font-mono text-[11px] uppercase tracking-caption text-white mb-4">
+              INTERACTIVE 3D INFRASTRUCTURE
+            </span>
+            <h2 class="display-xl text-white">
+              Sub-Millimeter Surgical &<br />Cellular Architecture.
+            </h2>
+          </div>
+          <p class="text-sm text-ink-body max-w-md mt-4 md:mt-0">
+            Select any orbital node on the 3D clinical core to inspect our optical tracking tolerances, cochlear bandwidth, and cryogenic vitrification specifications.
+          </p>
+        </div>
+
+        <div data-reveal>
+          <ClinicalNodeViewer client:visible />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 05: DUAL DEPARTMENT EDITORIAL DEEP-DIVE (LIGHT BAND)
+         ================================================================ -->
+    <section id="ent-wing" class="bg-canvas-light text-ink-onLight py-xxl border-b border-hairline-light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-12 space-y-24">
+        <!-- Wing 01: Micro-ENT -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start" data-reveal>
+          <div class="lg:col-span-5">
+            <span class="font-mono text-xs uppercase tracking-caption text-lunar-cyan font-semibold">
+              01 / OTOLARYNGOLOGY & HEAD-NECK SUITE
+            </span>
+            <h3 class="display-xl text-ink-onLight mt-3 mb-6">
+              Endoscopic Corridors. Zero External Scars.
+            </h3>
+            <p class="text-sm text-ink-muted leading-relaxed mb-8">
+              Directed by <strong>Dr. Gopinath</strong>, our ENT operating theatre integrates Carl Zeiss surgical microscopes, 4K ultra-HD Karl Storz endoscopes, and Medtronic cranial navigation for bloodless, rapid-recovery interventions.
+            </p>
+            <button
+              type="button"
+              onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'ENT' } }))"
+              class="btn-primary-cyan"
+            >
+              BOOK ENT EVALUATION
+            </button>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 border-t border-l border-hairline-light">
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-lunar-cyan mb-2">PROTOCOL 01</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">Micro-Ear & Tympanoplasty</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Laser and microscopic reconstruction of the tympanic membrane and ossicular chain (stapedotomy) for conductive hearing restoration.
+              </p>
+            </div>
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-lunar-cyan mb-2">PROTOCOL 02</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">4K FESS & Skull Base</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Functional Endoscopic Sinus Surgery, CSF leak repair, and pituitary access using sub-millimeter image guidance.
+              </p>
+            </div>
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-lunar-cyan mb-2">PROTOCOL 03</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">Vertigo & Balance Lab</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Videonystagmography (VNG) and targeted canalith repositioning maneuvers for BPPV, Meniere’s disease, and vestibular neuritis.
+              </p>
+            </div>
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-lunar-cyan mb-2">PROTOCOL 04</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">Sleep Apnea & Airway</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Drug-Induced Sleep Endoscopy (DISE) and plasma coblation palatoplasty for snoring and obstructive sleep apnea.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wing 02: IVF & Reproductive Medicine -->
+        <div id="ivf-wing" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-16 border-t border-hairline-light" data-reveal>
+          <div class="lg:col-span-5">
+            <span class="font-mono text-xs uppercase tracking-caption text-rosso font-semibold">
+              02 / ART & EMBRYOLOGY CLEANROOM SUITE
+            </span>
+            <h3 class="display-xl text-ink-onLight mt-3 mb-6">
+              Engineered for the First Days of Life.
+            </h3>
+            <p class="text-sm text-ink-muted leading-relaxed mb-8">
+              Led by <strong>Dr. Manopriya Gopinath</strong>, the Ponnaiah IVF wing features an ISO-5 modular cleanroom with positive-pressure VOC filtration, time-lapse incubators, and individualized hormonal protocols.
+            </p>
+            <button
+              type="button"
+              onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'IVF' } }))"
+              class="btn-primary-rosso"
+            >
+              BOOK FERTILITY CONSULTATION
+            </button>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 border-t border-l border-hairline-light">
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-rosso mb-2">ART 01</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">High-Precision ICSI</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Intracytoplasmic morphologically selected sperm injection overcoming severe male-factor infertility with single-cell accuracy.
+              </p>
+            </div>
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-rosso mb-2">ART 02</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">Blastocyst Culture & eSET</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Extended Day-5/Day-6 culture in tri-gas benchtop incubators maximizing implantation while minimizing multiple gestation risks.
+              </p>
+            </div>
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-rosso mb-2">ART 03</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">Fertility Enhancing Endoscopy</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Office hysteroscopy and 3D laparoscopy for endometriosis, uterine septa, and tubal patency restoration.
+              </p>
+            </div>
+            <div class="p-8 border-r border-b border-hairline-light bg-canvas-soft">
+              <div class="font-mono text-xs text-rosso mb-2">ART 04</div>
+              <h4 class="text-lg font-bold text-ink-onLight mb-2">Cryo-Banking & PGT-A</h4>
+              <p class="text-xs text-ink-muted leading-relaxed">
+                Oocyte/embryo vitrification and chromosomal euploidy screening for recurrent implantation failure or maternal age.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 06: ARCHITECTURAL PRE-FOOTER CTA BAND & FOOTER
+         ================================================================ -->
+    <section class="bg-canvas py-xxl border-b border-hairline-dark text-center px-6">
+      <div class="max-w-3xl mx-auto space-y-6" data-reveal>
+        <span class="font-mono text-xs uppercase tracking-caption text-lunar-cyan">
+          DIRECT SPECIALIST ACCESS
+        </span>
+        <h2 class="display-xl text-white">
+          Begin Your Clinical Journey with Certainty.
+        </h2>
+        <p class="text-sm text-ink-body max-w-xl mx-auto">
+          Schedule a private consultation with Dr. Gopinath or Dr. Manopriya Gopinath. Zero waiting-room congestion with pre-allocated diagnostic slots.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-4">
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'ENT' } }))"
+            class="btn-primary-cyan"
+          >
+            BOOK ENT APPOINTMENT
+          </button>
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-consultation-drawer', { detail: { division: 'IVF' } }))"
+            class="btn-primary-rosso"
+          >
+            BOOK IVF APPOINTMENT
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Ferrari 5-Column Dark Footer -->
+  <footer class="bg-canvas-deep text-ink-body py-16 px-6 lg:px-12 border-t border-hairline-dark">
+    <div class="max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-hairline-dark">
+      <div class="md:col-span-2 space-y-3">
+        <div class="text-base font-semibold tracking-[0.14em] text-white uppercase">
+          PONNAIAH ENT & IVF
+        </div>
+        <p class="text-xs text-ink-body max-w-sm leading-relaxed">
+          Super Speciality Hospital for Micro-Ear, Endoscopic Sinus, Skull Base Surgery & Advanced Reproductive Medicine.
+        </p>
+        <p class="font-mono text-[11px] text-white pt-2">
+          EMERGENCY & OP DESK: {HOSPITAL_IDENTITY.emergencyHotline}
+        </p>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <div class="font-mono text-[11px] uppercase tracking-caption text-white mb-3">
+          ENT DIVISION
+        </div>
+        <p>Dr. Gopinath (MS, DNB)</p>
+        <p>Cochlear Implant Clinic</p>
+        <p>4K Endoscopic Sinus Suite</p>
+        <p>Vertigo & Voice Stroboscopy</p>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <div class="font-mono text-[11px] uppercase tracking-caption text-white mb-3">
+          IVF DIVISION
+        </div>
+        <p>Dr. Manopriya Gopinath (MS, FRM)</p>
+        <p>ISO-5 Cleanroom ICSI Lab</p>
+        <p>Time-Lapse Blastocyst Culture</p>
+        <p>Cryo-Vitrification Core</p>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <div class="font-mono text-[11px] uppercase tracking-caption text-white mb-3">
+          DIGITAL ARCHITECTURE
+        </div>
+        <p>Acoustic Resonance Studio</p>
+        <p>3D Clinical Node Telemetry</p>
+        <p>Direct WhatsApp Concierge</p>
+      </div>
+    </div>
+
+    <div class="max-w-[1360px] mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-ink-muted gap-4">
+      <span>© {new Date().getFullYear()} PONNAIAH ENT & IVF SUPER SPECIALITY HOSPITAL. ALL RIGHTS RESERVED.</span>
+      <span class="text-lunar-silver">
+        ARCHITECTED BY <strong class="text-lunar-cyan">{HOSPITAL_IDENTITY.architectBrand}</strong>
+      </span>
+    </div>
+  </footer>
+</BaseLayout>
+
