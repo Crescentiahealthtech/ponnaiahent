@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --apple-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--apple-font);
+    color: #1d1d1f;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    letter-spacing: -0.022em;
+    font-size: 17px;
+    line-height: 1.47;
+  }
+
+  /* Apple signature headline kerning: negative letter-spacing, tight leading, weight 600 */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--apple-font);
+    font-weight: 600;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+}
+
+/* Apple Button & Interactive Utilities */
+.apple-btn-primary {
+  background-color: #0071e3;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.apple-btn-primary:hover {
+  background-color: #0077ed;
+}
+.apple-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.apple-btn-secondary {
+  background-color: transparent;
+  color: #0071e3;
+  border: 1px solid #0071e3;
+  border-radius: 9999px;
+  padding: 9px 20px;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.apple-btn-secondary:hover {
+  background-color: rgba(0, 113, 227, 0.08);
+}
+.apple-btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.apple-link {
+  color: #0066cc;
+  font-size: 17px;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.apple-link:hover {
+  text-decoration: underline;
+  color: #0077ed;
+}
+
+.apple-link-dark {
+  color: #2997ff;
+  font-size: 17px;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.apple-link-dark:hover {
+  text-decoration: underline;
+  color: #52aaff;
+}
+
+/* Apple Signature Drop Shadow for product imagery and 3D subjects resting on surface */
+.apple-product-shadow {
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.22);
+}
+
+/* Subtle hairline borders */
+.apple-hairline {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.apple-hairline-dark {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Frosted glass utilities matching Apple sub-nav and floating dock */
+.apple-frosted {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.82);
+}
+
+.apple-frosted-dark {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(22, 22, 23, 0.84);
+}
+
+/* Minimalist scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f7;
+}
+::-webkit-scrollbar-thumb {
+  background: #d2d2d7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #86868b;
+}
