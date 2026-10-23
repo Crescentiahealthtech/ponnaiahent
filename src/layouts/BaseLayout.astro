@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { HOSPITAL_IDENTITY } from '../data/clinicalData';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${HOSPITAL_IDENTITY.name} — ${HOSPITAL_IDENTITY.subName}`,
+  description = 'Flagship Super Speciality Centre for Micro-Ear, Endoscopic Sinus Surgery (Dr. Gopinath) & High-Precision IVF Reproductive Medicine (Dr. Manopriya Gopinath).',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-canvas-deep text-white antialiased selection:bg-lunar-cyan selection:text-canvas-deep">
+    <slot />
+
+    <script>
+      import Lenis from 'lenis';
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis({
+        duration: 1.15,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+
+      lenis.on('scroll', ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      // Reveal Animations for Editorial Sections
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 36, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 86%',
+            },
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
+
